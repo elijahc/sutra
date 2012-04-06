@@ -13,6 +13,9 @@ gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'haml'
 gem 'activerecord', :require => "active_record"
 gem 'sqlite3'
+gem 'awesome_print'
+gem 'json'
+gem 'log4r'
 
 # Test requirements
 
