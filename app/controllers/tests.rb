@@ -41,7 +41,8 @@ Sutra.controllers :tests do
   end
 
   get :edit, :with => :id do
-    #something
+
+    ap.Test.find(params[:id])
   end
 
   put :update, :with => :id do

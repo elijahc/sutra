@@ -1,5 +1,6 @@
-%label Name
-%input{:type=>'text'}
-%button#submit Submit
+%form{:action=>"/tests/create", :method=>"POST"}
+  %label Name
+  %input{:type=>'text', :name=>"name"}
+  %input#submit{:type=>'submit'}
 = javascript_include_tag "test.js"
 
