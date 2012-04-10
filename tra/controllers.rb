@@ -31,7 +31,7 @@ Tra.controllers  do
   # List all items of a given type. ie. /project(s) /run(s) /result(s)
   get :index, :map => '/:type' do |type|
     with_protection do |input_data|
-      cfg = REQUEST_CONFIGS[type]
+      cfg = $REQUEST_CONFIGS[type]
       raise BadURLException, "Invalid type requested: #{ type }" if cfg.nil?
 
       get_item_list( cfg[:table_name], cfg[:required_attributes] )
@@ -43,7 +43,7 @@ Tra.controllers  do
     with_protection do |input_data|
       ensure_id_numeric( id )
 
-      cfg = REQUEST_CONFIGS[type]
+      cfg = $REQUEST_CONFIGS[type]
       raise BadURLException, "Invalid type requested: #{ type }" if cfg.nil?
 
       get_attributes( cfg[:table_name], id, cfg[:required_attributes] )
@@ -55,7 +55,7 @@ Tra.controllers  do
     with_protection do |input_data|
       ensure_id_numeric( id )
 
-      cfg = REQUEST_CONFIGS[type]
+      cfg = $REQUEST_CONFIGS[type]
       raise BadURLException, "Invalid type requested: #{ type }" if cfg.nil?
 
       update_attributes( cfg[:table_name], id, input_data, cfg[:required_attributes] )
@@ -68,7 +68,7 @@ Tra.controllers  do
     with_protection do |input_data|
       ensure_id_numeric( id )
 
-      cfg = REQUEST_CONFIGS[type]
+      cfg = $REQUEST_CONFIGS[type]
       raise BadURLException, "Invalid type requested: #{ type }" if cfg.nil?
 
       delete_item( cfg[:table_name], id )
@@ -78,7 +78,7 @@ Tra.controllers  do
   # Create an item.
   post :index, :map => '/:type/create' do |type|
     with_protection do |input_data|
-      cfg = REQUEST_CONFIGS[type]
+      cfg = $REQUEST_CONFIGS[type]
       raise BadURLException, "Invalid type requested: #{ type }" if cfg.nil?
 
       insert_attributes( cfg[:table_name], input_data, cfg[:required_attributes] )
@@ -94,11 +94,11 @@ Tra.controllers  do
     with_protection do |input_data|
       ensure_id_numeric( id )
 
-      cfg = REQUEST_CONFIGS[type]
+      cfg = $REQUEST_CONFIGS[type]
       raise BadURLException, "Invalid type requested: #{ type }" if cfg.nil?
       raise BadURLException, "Invalid subtype requested: #{ subtype } for #{ type }" unless cfg[:allowed_subtypes].include? subtype
 
-      sub_cfg = REQUEST_CONFIGS[subtype]
+      sub_cfg = $REQUEST_CONFIGS[subtype]
       raise BadURLException, "Invalid subtype requested: #{ subtype } }" if sub_cfg.nil?
 
       ensure_record_exists( cfg[:table_name], id )

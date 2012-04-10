@@ -57,4 +57,11 @@ class Sutra < Padrino::Application
   #     render 'errors/505'
   #   end
   #
+  
+  layout :default
+
+  get :index do
+    "Placeholder for actual index page"
+    #fix this so the index page works
+  end
 end

@@ -1,0 +1,51 @@
+!!! 5
+%html{:lang => "en"}
+  %head
+    %title Sutra
+    / Le styles
+    :css
+      body {padding-top: 60px;}
+    = stylesheet_link_tag "bootstrap.css"
+    = stylesheet_link_tag "bootstrap-responsive.css"
+    = javascript_include_tag "jquery"
+    = javascript_include_tag "jquery.bgiframe.min.js"
+    = javascript_include_tag "jquery.autocomplete.min.js"
+    = javascript_include_tag "jquery.tooltip.min.js"
+    = javascript_include_tag "bootstrap-dropdown.js"
+
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = image_tag("logo.png", :height => "27px", :width => "27px", :class => "brand")
+          %a.brand{:href => "/"} Sutra
+          .nav-collapse
+            %ul.nav
+              %li.dropdown
+                %a.dropdown-toggle(href="#" data-toggle="dropdown")
+                  Tests
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "/tests"} View Tests
+                  %li
+                    %a{:href => "/tests/new"} Add Test
+                  %li
+                    %a{:href => ""} View Account Data
+              %li.dropdown
+                %a.dropdown-toggle(href="#" data-toggle="dropdown")
+                  Manage
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => ""} Manage Users
+                  %li
+                    %a{:href => ""} Manage ENUM Data
+    .container
+      = yield
+
+    %br
+    %br
+    %br
+    %hr
+    %p{:align => "center"}
+      Need Help? Please Contact

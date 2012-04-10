@@ -47,23 +47,23 @@ class Tra < Padrino::Application
   ### Config Objects         #############################################################################################
 
   # This collection holds all data necessary to genericize the get,put,post logic for all data types.
-  REQUEST_CONFIGS = Hash.new
-  REQUEST_CONFIGS['project'] = { :table_name => 'project',
+  $REQUEST_CONFIGS = Hash.new
+  $REQUEST_CONFIGS['project'] = { :table_name => 'project',
     :required_attributes => %w( name ),
     :allowed_subtypes => %w( runs )
   }
-  REQUEST_CONFIGS['run']     = { :table_name => 'run',
+  $REQUEST_CONFIGS['run']     = { :table_name => 'run',
     :required_attributes => %w( project_id description submitted_by ),
     :allowed_subtypes => %w( results )
   }
-  REQUEST_CONFIGS['result']  = { :table_name => 'result',
+  $REQUEST_CONFIGS['result']  = { :table_name => 'result',
     :required_attributes => %w( run_id test_case status ),
     :allowed_subtypes => %w()
   }
   # Provide plural names for data types.
-  REQUEST_CONFIGS['projects'] = REQUEST_CONFIGS['project']
-  REQUEST_CONFIGS['runs']     = REQUEST_CONFIGS['run']
-  REQUEST_CONFIGS['results']  = REQUEST_CONFIGS['result']
+  $REQUEST_CONFIGS['projects'] = $REQUEST_CONFIGS['project']
+  $REQUEST_CONFIGS['runs']     = $REQUEST_CONFIGS['run']
+  $REQUEST_CONFIGS['results']  = $REQUEST_CONFIGS['result']
 
   # Place holder classes for different exception types.
   class NotFoundException < Exception ; end
@@ -73,7 +73,7 @@ class Tra < Padrino::Application
   ########################################################################################################################
   ### Global Setup           #############################################################################################
 
-  $db = SQLite3::Database.new( "./tra.db" )
+  $db = SQLite3::Database.new( "./db/tra.db" )
   $db.results_as_hash = true
 
   $log = Logger.new( 'tra' )
@@ -121,7 +121,7 @@ class Tra < Padrino::Application
     $log.debug( '** Request Processing Initiated' )
 
     # Log EVERYTHING.
-    $log.debug( env.ai )
+#    $log.debug( env.ai )
 
     # Prepare to run the given code block within a database transaction.
     result = nil
